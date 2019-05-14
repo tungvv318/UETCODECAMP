@@ -9,10 +9,13 @@ public interface CustomerRepository {
     void insertCustomer(Customer customer);
 
     void deleteCustomer(Customer customer);
+
     void updateCustomer(Customer customer);
     List<Customer> getAllCustomer();
 
     Customer getCustomerByID(int id);
 
     Customer getCustomerByEmail(String email);
+
+    List<Customer> searchCustomerByText(String text);
 }

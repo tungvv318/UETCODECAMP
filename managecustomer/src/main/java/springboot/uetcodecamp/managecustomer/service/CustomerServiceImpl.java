@@ -42,4 +42,9 @@ public class CustomerServiceImpl implements CustomerService{
     public Customer getCustomerByEmail(String email) {
         return customerRepository.getCustomerByEmail(email);
     }
+
+    @Override
+    public List<Customer> searchCustomerByText(String text) {
+        return customerRepository.searchCustomerByText(text);
+    }
 }

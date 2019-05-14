@@ -26,15 +26,23 @@ public class HomeController {
     @PostMapping("/handle")
     public String handleForm(ModelMap model,
                              @RequestParam(name = "modeActive") String modeActive,
-                             @RequestParam(name = "idCustomer") Integer idCustomer){
+                             @RequestParam(name = "idCustomer") Integer idCustomer,
+                             @RequestParam(name = "searchCustomer") String searchCustomerByText){
         if ("Add".equals(modeActive)) {
             model.addAttribute("addCustomer", new Customer());
             return "formadd";
-        } else if ("Edit".equals(modeActive)) {
+        }
+        else if("Search".equals(modeActive)){
+            List<Customer> lstCustomerSearchByText = customerService.searchCustomerByText(searchCustomerByText);
+            model.addAttribute("lstCustomer",lstCustomerSearchByText);
+            return "home";
+        }
+        else if ("Edit".equals(modeActive)) {
             Customer editCustomer = customerService.getCustomerByID(idCustomer);
             model.addAttribute("editCustomer", editCustomer);
             return "formedit";
-        } else
+        }
+        else
             {
             Customer deleteCustomer = customerService.getCustomerByID(idCustomer);
             customerService.deleteCustomer(deleteCustomer);

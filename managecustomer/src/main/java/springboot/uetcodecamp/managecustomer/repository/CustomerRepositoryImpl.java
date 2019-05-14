@@ -54,4 +54,18 @@ public class CustomerRepositoryImpl implements CustomerRepository{
             }
             return null;
     }
+
+    @Override
+    public List<Customer> searchCustomerByText(String text) {
+        StringBuilder query = new StringBuilder("SELECT customer FROM Customer customer WHERE customer.name LIKE ");
+        query.append("'%" + text + "%'");
+        query.append(" OR customer.id LIKE ");
+        query.append("'%" + text + "%'");
+        query.append(" OR customer.email LIKE ");
+        query.append("'%" + text + "%'");
+        query.append(" OR customer.phone LIKE ");
+        query.append("'%" + text + "%'");
+        List<Customer> lstCustomerAfterSearch = sessionFactory.getCurrentSession().createQuery(query.toString()).list();
+        return lstCustomerAfterSearch;
+    }
 }
